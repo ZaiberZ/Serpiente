@@ -1,4 +1,7 @@
-﻿Public Class frmSnake
+Imports System.Diagnostics
+Imports System.Windows.Forms
+
+Public Class frmSnake
     Dim x = 0
     Dim y = 0
     Dim x1 = 0
@@ -36,7 +39,7 @@
         If (a = 9) Then
             Timer1.Stop()
             MsgBox("Ganaste")
-            End
+            Application.Exit()
         End If
         'p1,p2,p3,a
         If ((a = 1) And (PictureBox1.Location.X = PictureBox2.Location.X) And (PictureBox1.Location.Y = PictureBox2.Location.Y)) Then
@@ -289,7 +292,8 @@
             tiempo.Stop()
             Timer1.Stop()
             MsgBox("Perdiste")
-            Application.Restart()
+            Process.Start(Application.ExecutablePath)
+            Application.Exit()
         End If
 
     End Sub
