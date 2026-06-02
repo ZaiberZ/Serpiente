@@ -23,6 +23,8 @@ Public Class frmSnake
     Dim x9 = 0
     Dim y9 = 0
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+
+#Region "Direccion"
         If (RadioButton1.Checked) Then
             PictureBox1.Top -= 50
         End If
@@ -35,17 +37,26 @@ Public Class frmSnake
         If (RadioButton3.Checked) Then
             PictureBox1.Left += 50
         End If
+#End Region
+
 
         If (a = 9) Then
             Timer1.Stop()
             MsgBox("Ganaste")
             Application.Exit()
+        ElseIf (PictureBox1.Top = -50 Or PictureBox1.Top = 450 Or PictureBox1.Left = -50 Or PictureBox1.Left = 450) Then
+            Timer1.Stop()
+            MsgBox("Perdiste")
+            Application.Exit()
         End If
+
+
+
         'p1,p2,p3,a
         If ((a = 1) And (PictureBox1.Location.X = PictureBox2.Location.X) And (PictureBox1.Location.Y = PictureBox2.Location.Y)) Then
             a = 2
-            PictureBox3.Top = ejeY()
-            PictureBox3.Left = ejeX()
+            PictureBox3.Top = EjeY()
+            PictureBox3.Left = EjeX()
         End If
 
 
@@ -59,8 +70,8 @@ Public Class frmSnake
         'sigima(PictureBox1,PictureBox3 )
         If ((a >= 2) And (PictureBox1.Location.X = PictureBox3.Location.X) And (PictureBox1.Location.Y = PictureBox3.Location.Y)) Then
             a = 3
-            PictureBox4.Top = ejeY()
-            PictureBox4.Left = ejeX()
+            PictureBox4.Top = EjeY()
+            PictureBox4.Left = EjeX()
             x1 = PictureBox2.Left
             y1 = PictureBox2.Top
         End If
@@ -73,8 +84,8 @@ Public Class frmSnake
         End If
         If ((a >= 3) And (PictureBox1.Location.X = PictureBox4.Location.X) And (PictureBox1.Location.Y = PictureBox4.Location.Y)) Then
             a = 4
-            PictureBox5.Top = ejeY()
-            PictureBox5.Left = ejeX()
+            PictureBox5.Top = EjeY()
+            PictureBox5.Left = EjeX()
             x2 = PictureBox3.Left
             y2 = PictureBox3.Top
             Timer1.Interval = 300
@@ -89,8 +100,8 @@ Public Class frmSnake
         End If
         If ((a >= 4) And (PictureBox1.Location.X = PictureBox5.Location.X) And (PictureBox1.Location.Y = PictureBox5.Location.Y)) Then
             a = 5
-            PictureBox6.Top = ejeY()
-            PictureBox6.Left = ejeX()
+            PictureBox6.Top = EjeY()
+            PictureBox6.Left = EjeX()
             x3 = PictureBox4.Left
             y3 = PictureBox4.Top
         End If
@@ -100,13 +111,13 @@ Public Class frmSnake
             PictureBox5.Top = y3
             PictureBox5.Left = x3
             x3 = PictureBox4.Location.X
-            y3 = PictureBox4.Location.Y            
+            y3 = PictureBox4.Location.Y
             Label1.Text = a
         End If
         If ((a >= 5) And (PictureBox1.Location.X = PictureBox6.Location.X) And (PictureBox1.Location.Y = PictureBox6.Location.Y)) Then
             a = 6
-            PictureBox7.Top = ejeY()
-            PictureBox7.Left = ejeX()
+            PictureBox7.Top = EjeY()
+            PictureBox7.Left = EjeX()
             x4 = PictureBox5.Left
             y4 = PictureBox5.Top
             'MsgBox(y4 & " " & x4)
@@ -123,8 +134,8 @@ Public Class frmSnake
 
         If ((a >= 6) And (PictureBox1.Location.X = PictureBox7.Location.X) And (PictureBox1.Location.Y = PictureBox7.Location.Y)) Then
             a = 7
-            PictureBox8.Top = ejeY()
-            PictureBox8.Left = ejeX()
+            PictureBox8.Top = EjeY()
+            PictureBox8.Left = EjeX()
             x5 = PictureBox6.Left
             y5 = PictureBox6.Top
         End If
@@ -137,8 +148,8 @@ Public Class frmSnake
         End If
         If ((a >= 7) And (PictureBox1.Location.X = PictureBox8.Location.X) And (PictureBox1.Location.Y = PictureBox8.Location.Y)) Then
             a = 8
-            PictureBox9.Top = ejeY()
-            PictureBox9.Left = ejeX()
+            PictureBox9.Top = EjeY()
+            PictureBox9.Left = EjeX()
             x6 = PictureBox7.Left
             y6 = PictureBox7.Top
         End If
@@ -152,8 +163,8 @@ Public Class frmSnake
         End If
         If ((a >= 8) And (PictureBox1.Location.X = PictureBox9.Location.X) And (PictureBox1.Location.Y = PictureBox9.Location.Y)) Then
             a = 9
-            PictureBox9.Top = ejeY()
-            PictureBox9.Left = ejeX()
+            PictureBox9.Top = EjeY()
+            PictureBox9.Left = EjeX()
             x7 = PictureBox8.Left
             y7 = PictureBox8.Top
         End If
@@ -163,33 +174,34 @@ Public Class frmSnake
 
     Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         'MsgBox(e.KeyCode)
-        If e.KeyCode = 39 Then
+        'Left
+        If e.KeyCode = 39 And Not RadioButton2.Checked Then
             RadioButton3.Select()
         End If
-        If e.KeyCode = 37 Then
+        If e.KeyCode = 37 And Not RadioButton3.Checked Then
             RadioButton2.Select()
         End If
-        If e.KeyCode = 38 Then
+        If e.KeyCode = 38 And Not RadioButton4.Checked Then
             RadioButton1.Select()
         End If
-        If e.KeyCode = 40 Then
+        If e.KeyCode = 40 And Not RadioButton1.Checked Then
             RadioButton4.Select()
         End If
 
     End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         a = 1
-        PictureBox2.Top = ejeY()
-        PictureBox2.Left = ejeX()
+        PictureBox2.Top = EjeY()
+        PictureBox2.Left = EjeX()
         x = PictureBox2.Left
         y = PictureBox2.Top
-        Label2.Text = ti
+        Label2.Text = limitTimeSec
     End Sub
 
 
     Dim Na As Double
     Dim Na1 As Double
-    Private Function ejeX() As Integer
+    Private Function EjeX() As Integer
         'Na = Date.Now.Millisecond
         Na = CLng((0 - 1000) * Rnd() + 1000)
 
@@ -246,7 +258,7 @@ Public Class frmSnake
 
     End Function
 
-    Private Function ejeY() As Integer
+    Private Function EjeY() As Integer
         Na1 = Date.Now.Millisecond
         If (Na1 >= 0 And Na1 <= 83.3) Then
             Return 0
@@ -284,11 +296,12 @@ Public Class frmSnake
             Return 550
         End If
     End Function
-    Dim ti = 40
-    Private Sub tiempo_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tiempo.Tick
-        ti -= 1
-        Label2.Text = ti
-        If (ti = 0) Then
+
+    Dim limitTimeSec = 50
+    Private Sub AvanceTiempo(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tiempo.Tick
+        limitTimeSec -= 1
+        Label2.Text = limitTimeSec
+        If (limitTimeSec = 0) Then
             tiempo.Stop()
             Timer1.Stop()
             MsgBox("Perdiste")
